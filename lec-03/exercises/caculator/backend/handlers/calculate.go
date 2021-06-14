@@ -6,12 +6,16 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"tfs-02/lec-02/exercises/api_calculator/models"
+	"tfs-02/lec-03/exercises/caculator/backend/models"
 )
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
 func HandlersCalculate(w http.ResponseWriter, req *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	// w.Header().Set("Access-Control-Allow-Origin", "*")
+	// w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	enableCors(&w)
 	params := req.URL.Query()
 	op := params["op"]
 	rawA := params["a"]

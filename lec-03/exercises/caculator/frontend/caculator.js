@@ -1,12 +1,12 @@
+let datashow = document.getElementById("display");
 function clickNumber(input){
     calculator.display.value+=input
 }
 
-function displayCaculator(rawData){
+displayCaculator = (rawData)=>{
     let data = rawData.split(/(\+|-|\*|\/)/)
     let query
-    let url = "http://localhost:8080/calculate"
-    console.log(data)
+    let url = "http://localhost:5500/calculate"
     if(data.length == 1 ){
         if(typeof +data[0] === "number") return data[0]
         return "error"
@@ -30,8 +30,17 @@ function displayCaculator(rawData){
                   return "error"
               }
             query="?op="+ op + "&a=" + data[0] + "&b=" +data[2];
-            console.log(query)
-            return callApi(url+query)
+            console.log(url+query)
+            let res = 0
+            return fetch(url+query)
+                .then(response => response.json())
+                .then((data) => {
+                    res = data.result
+                    console.log(res)
+                    return res;
+                });
+
+
         } else return "error"
 
     } else{
@@ -39,10 +48,4 @@ function displayCaculator(rawData){
     }
 }
 
-function callApi(url){
-    res =  fetch(url).then(res => res.json).then(data => {
-        console.log(data)
-        return data.result
-    })
-}
 

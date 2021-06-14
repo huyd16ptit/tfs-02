@@ -36,7 +36,7 @@
                     <input type="button" name="zero" value="0" onclick="clickNumber(zero.value)">
                     <input type="button" name="dot" value="." onclick="clickNumber(dot.value)">
                     <input type="button" name="div" value="/" onclick="clickNumber(div.value)">
-                    <input type="button" class="equal" value="=" onclick="calculator.display.value=displayCaculator(calculator.display.value)">
+                    <input type="button" class="equal" value="=" onclick="displayCaculator(calculator.display.value).then((data)=>calculator.display.value=data)">
                 </div>
             </div>
         </form>  
